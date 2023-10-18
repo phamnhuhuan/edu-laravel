@@ -56,6 +56,12 @@ class ChangePassController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'password' => 'required|min:8',
+        ], [
+            'password.required' => 'Không được bỏ trống',
+            'password.min' => 'Lớn hơn 8 kí tự',
+        ]);
         $user=User::find($id);
         $user->update($request->all());
         toastr()->success('Đổi mật khẩu thành công');
