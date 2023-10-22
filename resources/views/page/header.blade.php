@@ -8,28 +8,28 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto">
-            <a href="{{url('/')}}" class="nav-item nav-link">Trang chủ</a>
-            <a href="{{url('gioi-thieu')}}" class="nav-item nav-link">Giới thiệu</a>
+            <a href="{{url('/')}}" class="nav-item nav-link {{Request::segment(1)== '' ? 'active' : ''}}">Trang chủ</a>
+            <a href="{{url('gioi-thieu')}}" class="nav-item nav-link {{Request::segment(1)== 'gioi-thieu' ? 'active' : ''}}">Giới thiệu</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Môn học</a>
+                <a href="#" class="nav-link dropdown-toggle {{Request::segment(1)== 'mon-hoc' ? 'active' : ''}}" data-bs-toggle="dropdown">Môn học</a>
                 <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
                     @foreach ($object as $value) 
-                <a href="{{Route('show.object',[$value->id_object, Str::slug($value->name_object)])}}" class="dropdown-item">{{$value->name_object}}</a>
+                <a href="{{Route('show.object',[$value->id_object, Str::slug($value->name_object)])}}" class="dropdown-item {{Request::segment(2)== $value->id_object.'-'.Str::slug($value->name_object) ? 'active-list' : ''}}">{{$value->name_object}}</a>
                 @endforeach
                 </div>
             </div>
-            <a href="{{url('bai-tap')}}" class="nav-item nav-link">Bài tập</a>
+            <a href="{{url('bai-tap')}}" class="{{Request::segment(1)== 'bai-tap' ? 'active' : ''}} nav-item nav-link">Bài tập</a>
             <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Lớp</a>
+                <a class="nav-link dropdown-toggle {{Request::segment(1)== 'hoc-sinh' ? 'active' : ''}}" data-bs-toggle="dropdown">Lớp</a>
                 <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
                     @foreach ($zoom as $value) 
-                    <a href="{{Route('show.zoom',[$value->id_zoom, Str::slug($value->name_zoom)])}}" class="dropdown-item">{{$value->name_zoom}}</a>
+                    <a href="{{Route('show.zoom',[$value->id_zoom, Str::slug($value->name_zoom)])}}" class="dropdown-item {{Request::segment(2)== $value->id_zoom.'-'.Str::slug($value->name_zoom) ? 'active-list' : ''}}">{{$value->name_zoom}}</a>
                     @endforeach
                    
                 </div>
             </div>
 
-            <a href="{{url('lien-he')}}" class="nav-item nav-link">Liên hệ</a>
+            <a href="{{url('lien-he')}}" class="nav-item nav-link {{Request::segment(1)== 'lien-he' ? 'active' : ''}}">Liên hệ</a>
             
             
             @if (Auth::check())
@@ -44,7 +44,7 @@
                
             </div>
             @else   
-            <a href="{{url('dang-nhap')}}" class="d-lg-none nav-item nav-link">Đăng nhập</a>
+            <a href="{{url('dang-nhap')}}" class="d-lg-none nav-item nav-link {{Request::segment(1)== 'dang-nhap' ? 'active' : ''}}">Đăng nhập</a>
             @endif
 
             @if (Auth::check())

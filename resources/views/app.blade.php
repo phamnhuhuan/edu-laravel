@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="canonical" href="{{Request::url()}}">
     <meta name="theme-color" content="#483285">
     <link rel="icon" href="{{ asset('img/icon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +25,12 @@
     a {
         text-decoration: none
     }
-
+    .dropdown-item:hover{
+        color: #fe5d37;
+    }
+    .dropdown-item.active-list{
+        color: #fe5d37;
+    }
     .divider:after,
     .divider:before {
         content: "";
@@ -54,6 +60,24 @@
         $(document).ready(function() {
             $('[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').hide();
         });
+    </script>
+    <script>
+        load_more_post();
+        function load_more_post(id='') {
+            $.ajax({
+                    url:"{{url('load_more')}}",
+                    method:"GET",
+                    data:{id:id},
+                    success:function(data){
+                        $('#load_btn').remove();
+                        $('#all_post').append(data);
+                    }
+                })
+        }
+        $(document).on('click','#load_btn',function () {
+            var id=$(this).data('id');
+            load_more_post(id);
+        })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"

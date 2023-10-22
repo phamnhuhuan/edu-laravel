@@ -46,6 +46,7 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('admin/post', PostController::class);
 });
 Route::resource('/', HomeController::class);
+Route::get('load_more', [HomeController::class,'load_more']);
 Route::middleware(['minifile'])->group(function () {
     Route::resource('gioi-thieu', AboutController::class);
     Route::resource('lien-he', ContactController::class);

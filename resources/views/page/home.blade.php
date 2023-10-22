@@ -3,11 +3,6 @@
 @endsection
 @extends('app')
 @section('content')
-@if (Cookie::has('user'))
-    co coookie
-@else
-    ko cookie
-@endif
     <div class="container-fluid p-0 mb-5">
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative">
@@ -82,10 +77,9 @@
                 <h1 class="mb-3">Bài giảng hôm nay</h1>
                 <p>Với kinh nghiệm của các thầy cô 5 năm trong ngành giáo dục tiểu học</p>
             </div>
-            <div class="row g-4">
-                @foreach ($post as $value)
-                    
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+            <div class="row g-4" id="all_post">
+                {{-- @foreach ($post as $value)
+                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a href="{{Route('show.post',[$value->id_post, Str::slug($value->name_post)])}}" class="text-decoration-none">
                         <div class="classes-item text-black">
                             <div class="bg-light rounded-circle w-75 mx-auto p-3">
@@ -127,14 +121,12 @@
                         </div>
                     </a>
                 </div>
-                @endforeach
+                @endforeach --}}
 
             </div>
         </div>
     </div>
-    <div style="display:flex;justify-content:center" data-wow-delay="0.5s">
-        <div>{{$post->links()}}</div>
-    </div>
+    
     <!-- Facilities Start -->
     <div class="container-xxl">
         <div class="container">
@@ -256,7 +248,6 @@
                             <h3 class="mb-1">Phạm Hoàng Long</h3>
                             <span>Học sinh lớp 3</span>
                         </div>
-
                     </div>
                 </div>
             </div>
